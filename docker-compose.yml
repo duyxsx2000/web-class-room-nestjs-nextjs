@@ -1,17 +1,39 @@
 version: '3.8'
 services:
   nextjs:
-    build: ./nextjs
+    build: ./front-end-nextjs
     ports:
       - "3000:3000"
     volumes:
-      - ./nextjs:/app
+      - ./front-end-nextjs:/app
     command: npm run dev
+    depends_on:
+      - mongo
+    environment:
+      MONGO_URL: mongodb://mongo:27017/dataWeb
 
   nestjs:
-    build: ./nestjs
+    build:
+      context: ./back-end-nest-js
+      target: development
     ports:
       - "3001:3001"
     volumes:
-      - ./nestjs:/app
+      - ./back-end-nest-js:/main
+      - /main/node_modules
     command: npm run start:dev
+    depends_on:
+      - mongo
+    environment:
+      MONGO_URL: mongodb://mongo:27017/dataWeb
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
