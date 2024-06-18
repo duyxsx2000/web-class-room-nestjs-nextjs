@@ -1,12 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { User } from './schemas/userSchema';
+import { User, UserDocument } from './schemas/userSchema';
 import { Model } from 'mongoose';
 import { UserModule } from './user.module';
 
 @Injectable()
 export class UserService {
-    constructor(@InjectModel(User.name) private userModel: Model<UserModule>) {}
+    constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
     async createUser() {
         try {
@@ -20,9 +20,9 @@ export class UserService {
         }
     }
 
-    async findOneUser(id: string) {
+    async findOneUserByEmail(email: string): Promise<UserDocument> {
         try {
-            const user = await this.userModel.findOne({idUser:id})
+            const user = await this.userModel.findOne({email: email})
             return user
         } catch (error) {
             throw new NotFoundException('error')

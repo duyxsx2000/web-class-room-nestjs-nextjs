@@ -19,10 +19,10 @@ export class UserController {
     async findUser(
         @Param('id') id: string
     ) {
-        console.log(id,'45678910');
+        console.log(id,'456789101112');
         
         try {
-            const user = await this.userService.findOneUser(id)
+            const user = await this.userService.findOneUserByEmail(id)
             return user
         } catch (error) {
             return 'error'

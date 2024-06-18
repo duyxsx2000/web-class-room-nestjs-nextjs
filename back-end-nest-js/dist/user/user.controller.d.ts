@@ -29,7 +29,7 @@ export declare class UserController {
     private readonly userService;
     constructor(userService: UserService);
     createUser(): Promise<"done" | "error">;
-    findUser(id: string): Promise<(import("mongoose").Document<unknown, {}, import("./user.module").UserModule> & import("./user.module").UserModule & Required<{
-        _id: unknown;
-    }>) | "error">;
+    findUser(id: string): Promise<(import("mongoose").Document<unknown, {}, import("./schemas/userSchema").User> & import("./schemas/userSchema").User & {
+        _id: import("mongoose").Types.ObjectId;
+    }) | "error">;
 }

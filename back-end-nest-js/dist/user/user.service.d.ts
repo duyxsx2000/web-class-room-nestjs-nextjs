@@ -23,13 +23,11 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
+import { User, UserDocument } from './schemas/userSchema';
 import { Model } from 'mongoose';
-import { UserModule } from './user.module';
 export declare class UserService {
     private userModel;
-    constructor(userModel: Model<UserModule>);
+    constructor(userModel: Model<User>);
     createUser(): Promise<string>;
-    findOneUser(id: string): Promise<import("mongoose").Document<unknown, {}, UserModule> & UserModule & Required<{
-        _id: unknown;
-    }>>;
+    findOneUserByEmail(email: string): Promise<UserDocument>;
 }

@@ -33,9 +33,9 @@ let UserService = class UserService {
             throw new common_1.NotFoundException('error');
         }
     }
-    async findOneUser(id) {
+    async findOneUserByEmail(email) {
         try {
-            const user = await this.userModel.findOne({ idUser: id });
+            const user = await this.userModel.findOne({ email: email });
             return user;
         }
         catch (error) {

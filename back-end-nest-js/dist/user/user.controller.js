@@ -29,9 +29,9 @@ let UserController = class UserController {
         }
     }
     async findUser(id) {
-        console.log(id, '456');
+        console.log(id, '456789101112');
         try {
-            const user = await this.userService.findOneUser(id);
+            const user = await this.userService.findOneUserByEmail(id);
             return user;
         }
         catch (error) {
